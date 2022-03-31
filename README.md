@@ -1,10 +1,10 @@
  
+## About
 
+Take down hot air balloons and recruit friends to storm the castle! 
 
-> Open this page at [https://dxn-sh.github.io/dragon-flight-game/](https://dxn-sh.github.io/dragon-flight-game/)
+> Play at [https://dxn-sh.github.io/dragon-flight-game/](https://dxn-sh.github.io/dragon-flight-game/)
 
+### Features
 
-#### Metadata (used for search, rendering)
-
-* for PXT/arcade
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+Custom sprites. Animated dragon flight. Background cloud movement. Text for actions.
