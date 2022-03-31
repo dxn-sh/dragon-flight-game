@@ -11,7 +11,7 @@ class ActionKind(Enum):
     Flying = 0
     Roaring = 1
     Buddy_Fly = 2
-    Babe_Fly = 3
+    Bro_Fly = 3
 
 #======VARIABLES======
 
@@ -22,18 +22,18 @@ kill_count = 0
 recruits = 0
 fire: Sprite = None   
 buddy: Sprite = None
-babe: Sprite = None
+bro: Sprite = None
 castle: Sprite = None
 circle: Sprite = None
-friend_img = [assets.image("buddy"), assets.image("buddy1"), assets.image("babe"),
-assets.image("babe1")]
+friend_img = [assets.image("buddy"), assets.image("buddy1"), assets.image("bro"),
+assets.image("bro1")]
 
 #======DRAGONS======
 
 #player set-up
 dragon = sprites.create(assets.image("dragon"), SpriteKind.player)
 dragon.set_flag(SpriteFlag.STAY_IN_SCREEN, True)
-dragon.set_position(30, 60)
+dragon.set_position(25, 60)
 dragon.z = 2
 
 #create buddy off-screen
@@ -41,10 +41,10 @@ buddy = sprites.create(friend_img[0], SpriteKind.friend)
 buddy.set_position(randint(200, 300), randint(40, 80))
 buddy.z = 2
 
-#create babe off-screen
-babe = sprites.create(friend_img[2], SpriteKind.friend)
-babe.set_position(randint(200, 300), randint(40, 80))
-babe.z = 2
+#create bro off-screen
+bro = sprites.create(friend_img[2], SpriteKind.friend)
+bro.set_position(randint(200, 300), randint(40, 80))
+bro.z = 2
 
 #creat castle off-screen
 castle = sprites.create(assets.image("end"), SpriteKind.castle)
@@ -65,12 +65,12 @@ buddy_fly.add_animation_frame(friend_img[0])
 animation.attach_animation(buddy, buddy_fly)
 animation.set_action(buddy, 2)
 
-#flying - babe
-babe_fly = animation.create_animation(3, 500)
-babe_fly.add_animation_frame(friend_img[3])
-babe_fly.add_animation_frame(friend_img[2])
-animation.attach_animation(babe, babe_fly)
-animation.set_action(babe, 3)
+#flying - bro
+bro_fly = animation.create_animation(3, 500)
+bro_fly.add_animation_frame(friend_img[3])
+bro_fly.add_animation_frame(friend_img[2])
+animation.attach_animation(bro, bro_fly)
+animation.set_action(bro, 3)
 
 #======PLAYER MECHANICS======
 
@@ -145,10 +145,10 @@ game.on_update_interval(2000, circle_spawn)
 def collecting(circle, dragon):
     global bg_speed, enemy_interval, speed
     circle.destroy() 
-    dragon.say_text("Delicious.", 400)
+    dragon.say_text("Yum.", 400)
     bg_speed = bg_speed - 10
     enemy_interval = enemy_interval - 500
-    speed = speed + 2
+    speed = speed + 3
 sprites.on_overlap(SpriteKind.booster, SpriteKind.player, collecting)
 
 #======ENEMIES======
@@ -174,8 +174,8 @@ def destroy_balloon(fire, human):
         #buddy can spawn
         buddy.vx = bg_speed - randint(1, 5)
     if kill_count >= 10 and recruits == 1:
-        #babe can spawn
-        babe.vx = bg_speed - randint(1, 5)
+        #bro can spawn
+        bro.vx = bg_speed - randint(1, 5)
         enemy_interval = enemy_interval + 1000
     if kill_count > 20:
         dragon.say_text("Almost there...", 500)
@@ -190,13 +190,13 @@ def make_friend(call, dragon):
     call.destroy() 
     dragon.vx = 0
     if recruits == 1:
-        #this is babe
-        dragon.set_position(25, dragon.y + 20)
+        #this is bro
+        dragon.set_position(25, dragon.y + 30)
         friend_img[2].flip_x()
         friend_img[3].flip_x()
     else:
         #this is buddy
-        dragon.set_position(25, dragon.y - 20)
+        dragon.set_position(25, dragon.y - 30)
         friend_img[0].flip_x()
         friend_img[1].flip_x()
     recruits += 1

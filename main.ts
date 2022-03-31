@@ -11,7 +11,7 @@ class ActionKind {
     static Flying = 0
     static Roaring = 1
     static Buddy_Fly = 2
-    static Babe_Fly = 3
+    static Bro_Fly = 3
 }
 
 // ======VARIABLES======
@@ -22,24 +22,24 @@ let kill_count = 0
 let recruits = 0
 let fire : Sprite = null
 let buddy : Sprite = null
-let babe : Sprite = null
+let bro : Sprite = null
 let castle : Sprite = null
 let circle : Sprite = null
-let friend_img = [assets.image`buddy`, assets.image`buddy1`, assets.image`babe`, assets.image`babe1`]
+let friend_img = [assets.image`buddy`, assets.image`buddy1`, assets.image`bro`, assets.image`bro1`]
 // ======DRAGONS======
 // player set-up
 let dragon = sprites.create(assets.image`dragon`, SpriteKind.Player)
 dragon.setFlag(SpriteFlag.StayInScreen, true)
-dragon.setPosition(30, 60)
+dragon.setPosition(25, 60)
 dragon.z = 2
 // create buddy off-screen
 buddy = sprites.create(friend_img[0], SpriteKind.friend)
 buddy.setPosition(randint(200, 300), randint(40, 80))
 buddy.z = 2
-// create babe off-screen
-babe = sprites.create(friend_img[2], SpriteKind.friend)
-babe.setPosition(randint(200, 300), randint(40, 80))
-babe.z = 2
+// create bro off-screen
+bro = sprites.create(friend_img[2], SpriteKind.friend)
+bro.setPosition(randint(200, 300), randint(40, 80))
+bro.z = 2
 // creat castle off-screen
 castle = sprites.create(assets.image`end`, SpriteKind.castle)
 castle.x = 250
@@ -56,12 +56,12 @@ buddy_fly.addAnimationFrame(friend_img[1])
 buddy_fly.addAnimationFrame(friend_img[0])
 animation.attachAnimation(buddy, buddy_fly)
 animation.setAction(buddy, 2)
-// flying - babe
-let babe_fly = animation.createAnimation(3, 500)
-babe_fly.addAnimationFrame(friend_img[3])
-babe_fly.addAnimationFrame(friend_img[2])
-animation.attachAnimation(babe, babe_fly)
-animation.setAction(babe, 3)
+// flying - bro
+let bro_fly = animation.createAnimation(3, 500)
+bro_fly.addAnimationFrame(friend_img[3])
+bro_fly.addAnimationFrame(friend_img[2])
+animation.attachAnimation(bro, bro_fly)
+animation.setAction(bro, 3)
 // ======PLAYER MECHANICS======
 // player move
 game.onUpdate(function move() {
@@ -132,10 +132,10 @@ game.onUpdateInterval(2000, function circle_spawn() {
 sprites.onOverlap(SpriteKind.booster, SpriteKind.Player, function collecting(circle: Sprite, dragon: Sprite) {
     
     circle.destroy()
-    dragon.sayText("Delicious.", 400)
+    dragon.sayText("Yum.", 400)
     bg_speed = bg_speed - 10
     enemy_interval = enemy_interval - 500
-    speed = speed + 2
+    speed = speed + 3
 })
 // ======ENEMIES======
 // enemy spawn
@@ -163,8 +163,8 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.human, function destroy_ball
     }
     
     if (kill_count >= 10 && recruits == 1) {
-        // babe can spawn
-        babe.vx = bg_speed - randint(1, 5)
+        // bro can spawn
+        bro.vx = bg_speed - randint(1, 5)
         enemy_interval = enemy_interval + 1000
     }
     
@@ -181,13 +181,13 @@ sprites.onOverlap(SpriteKind.call, SpriteKind.friend, function make_friend(call:
     call.destroy()
     dragon.vx = 0
     if (recruits == 1) {
-        // this is babe
-        dragon.setPosition(25, dragon.y + 20)
+        // this is bro
+        dragon.setPosition(25, dragon.y + 30)
         friend_img[2].flipX()
         friend_img[3].flipX()
     } else {
         // this is buddy
-        dragon.setPosition(25, dragon.y - 20)
+        dragon.setPosition(25, dragon.y - 30)
         friend_img[0].flipX()
         friend_img[1].flipX()
     }
